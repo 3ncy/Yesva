@@ -364,3 +364,4 @@ FodyWeavers.xsd
 
 # config file w token
 Yesva/appsettings.json
+/Yesva/appsettings.Development.json
