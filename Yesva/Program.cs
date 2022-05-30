@@ -52,62 +52,11 @@ class Program
                  services.AddHostedService<Services.InteractionHandler>();
              }).Build();
 
+        
+
+        Modules.TestCommands.httpClient.DefaultRequestHeaders.Add("Authorization", "Bot " 
+            + new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", false, true).Build()["token"]); //trosku dirty, mozna by to chtelo predelat, ale nevim jestli to jde elegantneji
+
         await host.RunAsync();
-
-        /*
-        var builder = new HostBuilder()
-            .ConfigureAppConfiguration(x =>
-            {
-                var configuration = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", false, true).Build();
-
-                x.AddConfiguration(configuration);
-            })
-            .ConfigureLogging(x =>
-            {
-                x.AddConsole();
-                x.SetMinimumLevel(LogLevel.Debug);
-            })
-            .ConfigureDiscordHost((context, config) =>
-            {
-                config.SocketConfig = new DiscordSocketConfig
-                {
-                    LogLevel = Discord.LogSeverity.Debug,
-                    AlwaysDownloadUsers = false,
-                    MessageCacheSize = 50,
-                    //GatewayIntents = Discord.GatewayIntents.All
-                    GatewayIntents = Discord.GatewayIntents.AllUnprivileged
-                                     | Discord.GatewayIntents.GuildPresences
-                                     | Discord.GatewayIntents.GuildMembers
-                                     | Discord.GatewayIntents.GuildMessages
-
-                };
-
-                config.Token = context.Configuration["token"];
-            })
-            .UseCommandService((context, config) =>
-            {
-                config.CaseSensitiveCommands = false;
-                config.LogLevel = Discord.LogSeverity.Debug;
-                //config.DefaultRunMode = Discord.Commands.RunMode.Async;  //mozna bude needed, ale nevim jak to bude zvladat moje RPi
-            })
-            .UseInteractionService((context, config) =>
-            {
-                config.LogLevel = LogSeverity.Info;
-                config.UseCompiledLambda = true;
-            })
-            .ConfigureServices((context, services) =>
-            {
-                services.AddHostedService<Services.CommandHandler>();
-                services.AddHostedService<Services.InteractionHandler>();
-            })
-            .UseConsoleLifetime();
-
-        var host = builder.Build();
-        using (host)
-        {
-            await host.RunAsync();
-        }
-        */
     }
 }

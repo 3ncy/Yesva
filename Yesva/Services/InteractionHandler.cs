@@ -56,15 +56,12 @@ internal class InteractionHandler : DiscordClientService
             Logger.LogInformation("The bot has started in PRODUCTION configuration");
             await _interactionService.RegisterCommandsGloballyAsync();
         }
-
     }
 
 
 
     private async Task HandleInteraction(SocketInteraction arg)
     {
-        Logger.LogInformation("eeeeeey");
-
         try
         {
             var context = new SocketInteractionContext(Client, arg);
@@ -81,5 +78,4 @@ internal class InteractionHandler : DiscordClientService
             }
         }
     }
-
 }

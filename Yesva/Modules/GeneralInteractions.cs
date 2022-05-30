@@ -10,9 +10,9 @@ namespace Yesva.Modules;
 
 public class GeneralInteractions : InteractionModuleBase<SocketInteractionContext>
 {
-    [SlashCommand("ping", "Pings the bot")]
-    public async Task PingCommand()
-    {
-        await RespondAsync("pong");
-    }
+    //[SlashCommand("ping", "Pings the bot")]
+    //public async Task PingCommand()
+    //{
+    //    await RespondAsync("pong");
+    //}
 }
