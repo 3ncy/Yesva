@@ -16,7 +16,7 @@ public class TestCommands : ModuleBase<SocketCommandContext>
     [RequireOwner]
     public async Task Test()
     {
-        Modules.TestCommands.httpClient.DefaultRequestHeaders.Add("Authorization", "Bot OTUwNzc2MzkzMzU1MTIwNjgw.Yid1hA.LC9um2B_FkfYK_pmlmTyV1vbh_E");
+
     }
 
     [Command("t2")]

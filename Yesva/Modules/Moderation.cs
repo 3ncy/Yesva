@@ -20,4 +20,11 @@ internal class Moderation
         await user.Guild.AddBanAsync(user, pruneDays, reason);
         return $"User {user.DisplayName}#{user.Discriminator} has been banned" + ((reason != "") ? $" with the reason `{reason}`!" : "!");
     }
+
+    internal static async Task<string> Timeout(SocketGuildUser user, long duration)
+    {
+        TimeSpan time = TimeSpan.FromMilliseconds(duration);
+        await user.SetTimeOutAsync(time);
+        return $"User {user.DisplayName}#{user.Discriminator} has been timed out untill " + (DateTime.Now +  time);
+    }
 }

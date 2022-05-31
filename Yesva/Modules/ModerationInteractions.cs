@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Yesva.Modules;
 
+//mozna bych mohl implementovat groupu commandu a pridat i dalsi veci
 public class ModerationInteractions : InteractionModuleBase<SocketInteractionContext>
 {
     [SlashCommand("kick", "Kicks user from the guild.")]
@@ -45,6 +46,27 @@ public class ModerationInteractions : InteractionModuleBase<SocketInteractionCon
         {
             if (ex.Reason == "Missing Permissions")
                 result = "I don't have the permission to ban others";
+        }
+
+        await RespondAsync(result);
+    }
+
+    [SlashCommand("mute", "Mutes user from chat")]
+    [RequireUserPermission(GuildPermission.MuteMembers)]
+    public async Task Mute(SocketGuildUser user, [Choice("1min", 60000)][Choice("5min", 300000)][Choice("10min", 600000)][Choice("1hour", 3600000)][Choice("1day", 86400000)][Choice("1 week", 604800000)] long duration)
+    {
+        string result = "";
+        try
+        {
+            //DeferAsync();
+            result = await Moderation.Timeout(user, duration);
+        }
+        catch (Discord.Net.HttpException ex)
+        {
+            if (ex.Reason == "Missing Permissions")
+                result = "I don't have the permission to timeout others";
+            else
+                result = "Unexpected error happened: " + ex.Reason;
         }
 
         await RespondAsync(result);
