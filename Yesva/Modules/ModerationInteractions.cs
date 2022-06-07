@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace Yesva.Modules;
 
 //mozna bych mohl implementovat groupu commandu a pridat i dalsi veci
+[EnabledInDm(false)]
 public class ModerationInteractions : InteractionModuleBase<SocketInteractionContext>
 {
     [SlashCommand("kick", "Kicks user from the guild.")]
